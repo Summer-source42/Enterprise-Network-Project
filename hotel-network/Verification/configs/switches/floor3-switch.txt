@@ -1,1 +1,80 @@
+! ============================================================
+! Vic Modern Hotel
+! Device  : Cisco 2911 — Floor 3 Router (F3-Router)
+! Role    : Inter-VLAN routing + DHCP server + OSPF + SSH
+! VLANs   : 10 (IT), 20 (Admin)
+! Serial  : Se0/1/0 → F2-Router (10.10.10.0/30)
+!           Se0/1/1 → F1-Router (10.10.10.8/30)
+! ============================================================
 
+hostname F3-Router
+
+! -------------------------------------------------------
+! SSH Prerequisites
+! -------------------------------------------------------
+ip domain-name gtac
+username gtac password gtac
+crypto key generate rsa
+! Enter 1024 when prompted for modulus size
+
+! -------------------------------------------------------
+! Serial WAN Interfaces
+! -------------------------------------------------------
+interface Serial0/1/0
+ ip address 10.10.10.2 255.255.255.252
+ no shutdown
+
+interface Serial0/1/1
+ ip address 10.10.10.10 255.255.255.252
+ clock rate 64000
+ no shutdown
+
+! -------------------------------------------------------
+! Physical GigabitEthernet -- must be up for sub-interfaces
+! -------------------------------------------------------
+interface GigabitEthernet0/0
+ no shutdown
+
+! -------------------------------------------------------
+! Sub-interfaces — Inter-VLAN Routing (Router-on-a-Stick)
+! -------------------------------------------------------
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.1.1 255.255.255.0
+
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.2.1 255.255.255.0
+
+! -------------------------------------------------------
+! DHCP Server -- one pool per department
+! -------------------------------------------------------
+service dhcp
+
+ip dhcp pool it
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 192.168.1.1
+
+ip dhcp pool admin
+ network 192.168.2.0 255.255.255.0
+ default-router 192.168.2.1
+ dns-server 192.168.2.1
+
+! -------------------------------------------------------
+! OSPF -- advertise all connected networks
+! -------------------------------------------------------
+router ospf 10
+ network 10.10.10.8 0.0.0.3 area 0
+ network 10.10.10.0 0.0.0.3 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+
+! -------------------------------------------------------
+! SSH -- VTY lines restricted to SSH only (no telnet)
+! -------------------------------------------------------
+line vty 0 15
+ login local
+ transport input ssh
+
+end
