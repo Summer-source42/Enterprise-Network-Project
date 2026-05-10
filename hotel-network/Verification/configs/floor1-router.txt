@@ -1,1 +1,91 @@
+! ============================================================
+! Vic Modern Hotel
+! Device  : Cisco 2911 -- Floor 1 Router (F1-Router)
+! Role    : Inter-VLAN routing + DHCP server + OSPF + SSH
+! VLANs   : 80 (Reception), 70 (Store), 60 (Logistics)
+! Serial  : Se0/2/0 → F2-Router (10.10.10.4/30)
+!           Se0/2/1 → F3-Router (10.10.10.8/30)
+! ============================================================
 
+hostname F1-Router
+
+! -------------------------------------------------------
+! SSH Prerequisites
+! -------------------------------------------------------
+ip domain-name gtac
+username gtac password gtac
+crypto key generate rsa
+! Enter 1024 when prompted for modulus size
+
+! -------------------------------------------------------
+! Serial WAN Interfaces
+! -------------------------------------------------------
+interface Serial0/2/0
+ ip address 10.10.10.5 255.255.255.252
+ clock rate 64000
+ no shutdown
+
+interface Serial0/2/1
+ ip address 10.10.10.9 255.255.255.252
+ clock rate 64000
+ no shutdown
+
+! -------------------------------------------------------
+! Physical GigabitEthernet -- must be up for sub-interfaces
+! -------------------------------------------------------
+interface GigabitEthernet0/0
+ no shutdown
+
+! -------------------------------------------------------
+! Sub-interfaces -- Inter-VLAN Routing (Router-on-a-Stick)
+! -------------------------------------------------------
+interface GigabitEthernet0/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.8.1 255.255.255.0
+
+interface GigabitEthernet0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.7.1 255.255.255.0
+
+interface GigabitEthernet0/0.60
+ encapsulation dot1Q 60
+ ip address 192.168.6.1 255.255.255.0
+
+! -------------------------------------------------------
+! DHCP Server -- one pool per department
+! -------------------------------------------------------
+service dhcp
+
+ip dhcp pool reception
+ network 192.168.8.0 255.255.255.0
+ default-router 192.168.8.1
+ dns-server 192.168.8.1
+
+ip dhcp pool store
+ network 192.168.7.0 255.255.255.0
+ default-router 192.168.7.1
+ dns-server 192.168.7.1
+
+ip dhcp pool logistics
+ network 192.168.6.0 255.255.255.0
+ default-router 192.168.6.1
+ dns-server 192.168.6.1
+
+! -------------------------------------------------------
+! OSPF -- advertise all connected networks
+! -------------------------------------------------------
+router ospf 10
+ network 10.10.10.4 0.0.0.3 area 0
+ network 10.10.10.8 0.0.0.3 area 0
+ network 192.168.8.0 0.0.0.255 area 0
+ network 192.168.7.0 0.0.0.255 area 0
+ network 192.168.6.0 0.0.0.255 area 0
+
+! -------------------------------------------------------
+! SSH -- VTY lines restricted to SSH only (no telnet)
+! -------------------------------------------------------
+line vty 0 15
+ login local
+ transport input ssh
+
+end
