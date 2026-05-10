@@ -1,1 +1,35 @@
+! ============================================================
+! Vic Modern Hotel
+! Device  : Cisco 2960 -- Floor 1 Switch (F1-Switch)
+! Role    : VLAN segmentation + trunk uplink to F1-Router
+! VLANs   : 80 (Reception), 70 (Store), 60 (Logistics)
+! ============================================================
 
+hostname F1-Switch
+
+! -------------------------------------------------------
+! Access Ports -- one VLAN per department
+! -------------------------------------------------------
+
+! VLAN 80 -- Reception
+interface range fa0/2 - 3
+ switchport mode access
+ switchport access vlan 80
+
+! VLAN 70 -- Store
+interface range fa0/4 - 5
+ switchport mode access
+ switchport access vlan 70
+
+! VLAN 60 -- Logistics
+interface range fa0/6 - 8
+ switchport mode access
+ switchport access vlan 60
+
+! -------------------------------------------------------
+! Trunk Port -- uplink to F1-Router (carries all VLANs)
+! -------------------------------------------------------
+interface fa0/1
+ switchport mode trunk
+
+end
