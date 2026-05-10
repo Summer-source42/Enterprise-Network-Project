@@ -1,1 +1,89 @@
+! ============================================================
+! Vic Modern Hotel
+! Device  : Cisco 2911 -- Floor 2 Router (F2-Router)
+! Role    : Inter-VLAN routing + DHCP server + OSPF + SSH
+! VLANs   : 50 (Finance), 40 (HR), 30 (Sales & Marketing)
+! Serial  : Se0/0/0 → F3-Router (10.10.10.0/30)
+!           Se0/0/1 → F1-Router (10.10.10.4/30)
+! ============================================================
 
+hostname F2-Router
+
+! -------------------------------------------------------
+! SSH Prerequisites
+! -------------------------------------------------------
+ip domain-name gtac
+username gtac password gtac
+crypto key generate rsa
+! Enter 1024 when prompted for modulus size
+
+! -------------------------------------------------------
+! Serial WAN Interfaces
+! -------------------------------------------------------
+interface Serial0/0/0
+ ip address 10.10.10.1 255.255.255.252
+ no shutdown
+
+interface Serial0/0/1
+ ip address 10.10.10.6 255.255.255.252
+ no shutdown
+
+! -------------------------------------------------------
+! Physical GigabitEthernet -- must be up for sub-interfaces
+! -------------------------------------------------------
+interface GigabitEthernet0/0
+ no shutdown
+
+! -------------------------------------------------------
+! Sub-interfaces -- Inter-VLAN Routing (Router-on-a-Stick)
+! -------------------------------------------------------
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.5.1 255.255.255.0
+
+interface GigabitEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.4.1 255.255.255.0
+
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.3.1 255.255.255.0
+
+! -------------------------------------------------------
+! DHCP Server -- one pool per department
+! -------------------------------------------------------
+service dhcp
+
+ip dhcp pool finance
+ network 192.168.5.0 255.255.255.0
+ default-router 192.168.5.1
+ dns-server 192.168.5.1
+
+ip dhcp pool hr
+ network 192.168.4.0 255.255.255.0
+ default-router 192.168.4.1
+ dns-server 192.168.4.1
+
+ip dhcp pool sales
+ network 192.168.3.0 255.255.255.0
+ default-router 192.168.3.1
+ dns-server 192.168.3.1
+
+! -------------------------------------------------------
+! OSPF -- advertise all connected networks
+! -------------------------------------------------------
+router ospf 10
+ network 10.10.10.0 0.0.0.3 area 0
+ network 10.10.10.4 0.0.0.3 area 0
+ network 192.168.3.0 0.0.0.255 area 0
+ network 192.168.4.0 0.0.0.255 area 0
+ network 192.168.5.0 0.0.0.255 area 0
+
+! -------------------------------------------------------
+! SSH -- VTY lines restricted to SSH only (no telnet)
+! -------------------------------------------------------
+line vty 0 15
+ login local
+ transport input ssh
+
+end
