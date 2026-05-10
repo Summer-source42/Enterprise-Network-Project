@@ -1,1 +1,56 @@
+! ============================================================
+!XYZ Company Branch Office Network
+! Device  : Cisco 2911 Router
+! Role    : Inter-VLAN routing + DHCP server for all 3 VLANs
+! VLANs   : 10 (Admin/IT), 20 (Finance/HR), 30 (CS/Reception)
+! ============================================================
 
+hostname Router
+
+! -------------------------------------------------------
+! Bring up the physical interface
+! -------------------------------------------------------
+interface GigabitEthernet0/0
+ no shutdown
+
+! -------------------------------------------------------
+! Sub-interfaces -- Inter-VLAN Routing (Router-on-a-Stick)
+! Each sub-interface = default gateway for its VLAN
+! -------------------------------------------------------
+
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.1.1 255.255.255.192
+
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.1.65 255.255.255.192
+
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.1.129 255.255.255.192
+
+! -------------------------------------------------------
+! DHCP Server -- one pool per VLAN
+! -------------------------------------------------------
+service dhcp
+
+ip dhcp pool admin
+ network 192.168.1.0 255.255.255.192
+ default-router 192.168.1.1
+ dns-server 192.168.1.1
+ domain-name admin.com
+
+ip dhcp pool finance
+ network 192.168.1.64 255.255.255.192
+ default-router 192.168.1.65
+ dns-server 192.168.1.65
+ domain-name finance.com
+
+ip dhcp pool cs
+ network 192.168.1.128 255.255.255.192
+ default-router 192.168.1.129
+ dns-server 192.168.1.129
+ domain-name css.com
+
+end
