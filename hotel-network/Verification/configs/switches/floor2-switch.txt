@@ -1,1 +1,35 @@
+! ============================================================
+! Vic Modern Hotel
+! Device  : Cisco 2960 -- Floor 2 Switch (F2-Switch)
+! Role    : VLAN segmentation + trunk uplink to F2-Router
+! VLANs   : 50 (Finance), 40 (HR), 30 (Sales & Marketing)
+! ============================================================
 
+hostname F2-Switch
+
+! -------------------------------------------------------
+! Access Ports -- one VLAN per department
+! -------------------------------------------------------
+
+! VLAN 50 -- Finance
+interface range fa0/2 - 3
+ switchport mode access
+ switchport access vlan 50
+
+! VLAN 40 -- HR
+interface range fa0/4 - 5
+ switchport mode access
+ switchport access vlan 40
+
+! VLAN 30 -- Sales & Marketing
+interface range fa0/6 - 8
+ switchport mode access
+ switchport access vlan 30
+
+! -------------------------------------------------------
+! Trunk Port -- uplink to F2-Router (carries all VLANs)
+! -------------------------------------------------------
+interface fa0/1
+ switchport mode trunk
+
+end
