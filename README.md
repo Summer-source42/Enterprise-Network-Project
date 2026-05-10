@@ -2,7 +2,7 @@
 
 **CCNA Certified** | Designed, configured, and verified from scratch using Cisco Packet Tracer
 
-This repository documents two end-to-end network design and implementation projects. Each one starts from a real-world business scenario with a defined set of requirements. I handled everything from topology design and IP addressing to full device configuration and connectivity verification.
+This repository documents two end to end network design and implementation projects. Each one starts from a real world business scenario with a defined set of requirements. I handled everything from topology design and IP addressing to full device configuration and connectivity verification.
 
 The goal isn't just to show that I passed an exam. It's to show that I can take a problem, plan a solution, and actually build it.
 
