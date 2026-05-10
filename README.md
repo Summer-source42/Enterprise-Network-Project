@@ -12,7 +12,7 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 
 | # | Project | Complexity | Key Protocols & Features |
 |---|---------|------------|--------------------------|
-| 1 | [Branch Office Network](.//) | Foundational | VLANs, Inter-VLAN Routing, DHCP, Wireless |
+| 1 | [SOHO Network Network](./SOHO%20Network) | Foundational | VLANs, Inter-VLAN Routing, DHCP, Wireless |
 | 2 | [Vic Modern Hotel - Multi-Floor Network](./) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless |
 
 ---
