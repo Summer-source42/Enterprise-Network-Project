@@ -55,7 +55,7 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 
 ## Certifications
 
-- [**Cisco Certified Network Associate (CCNA)** ](https://www.credly.com/badges/232402c7-a40d-4b8a-a8ec-6df41d06207b/linked_in?t=tdufp8)
+🛡️ [**Cisco Certified Network Associate (CCNA)** ](https://www.credly.com/badges/232402c7-a40d-4b8a-a8ec-6df41d06207b/linked_in?t=tdufp8)
 
 ---
 
