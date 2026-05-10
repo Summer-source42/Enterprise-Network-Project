@@ -1,1 +1,35 @@
+! ============================================================
+! XYZ Company Branch Office Network
+! Device  : Cisco 2960 Switch
+! Role    : VLAN segmentation + trunk uplink to router
+! VLANs   : 10 (Admin/IT), 20 (Finance/HR), 30 (CS/Reception)
+! ============================================================
 
+hostname Switch
+
+! -------------------------------------------------------
+! Access Ports -- one VLAN per department
+! -------------------------------------------------------
+
+! VLAN 10 -- Admin / IT (Fa0/2 to Fa0/4)
+interface range fa0/2 - 4
+ switchport mode access
+ switchport access vlan 10
+
+! VLAN 20 -- Finance / HR (Fa0/5 to Fa0/7)
+interface range fa0/5 - 7
+ switchport mode access
+ switchport access vlan 20
+
+! VLAN 30 -- Customer Service / Reception (Fa0/8 to Fa0/10)
+interface range fa0/8 - 10
+ switchport mode access
+ switchport access vlan 30
+
+! -------------------------------------------------------
+! Trunk Port -- uplink to router (carries all VLANs)
+! -------------------------------------------------------
+interface fa0/1
+ switchport mode trunk
+
+end
