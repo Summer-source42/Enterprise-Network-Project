@@ -30,7 +30,7 @@ The branch network had to run completely separately from HQ, its own addressing,
    Access Point  Access Point   Access Point
 ```
  
-> `![Network Topology]()`
+> `![Network Topology](/SOHO.png)`
  
 ---
  
