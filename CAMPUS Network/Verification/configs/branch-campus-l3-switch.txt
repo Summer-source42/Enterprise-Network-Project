@@ -1,0 +1,32 @@
+! ============================================================
+! Branch Campus Layer 3 Switch
+! Device  : Cisco 3650 (Multilayer Switch)
+! Role    : Distribution layer connects Staff and Student Lab switches to router
+! Note    : Must have AC power supply module added in Packet Tracer physical tab
+!           before it will boot. Power off → drag module → power on.
+! ============================================================
+
+hostname Branch-Campus-L3-Switch
+
+! -------------------------------------------------------
+! Access ports one per department access switch
+! -------------------------------------------------------
+
+! Staff switch → VLAN 90
+interface GigabitEthernet1/0/2
+ switchport mode access
+ switchport access vlan 90
+
+! Student Labs switch → VLAN 100
+interface GigabitEthernet1/0/3
+ switchport mode access
+ switchport access vlan 100
+
+! -------------------------------------------------------
+! Trunk port uplink to Branch Campus Router
+! -------------------------------------------------------
+interface GigabitEthernet1/0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+
+end
