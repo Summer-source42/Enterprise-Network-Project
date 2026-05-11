@@ -1,0 +1,15 @@
+! ============================================================
+! Staff Switch (Branch Campus)
+! Device  : Cisco 2960
+! Faculty : Health and Sciences (Branch Campus)
+! VLAN    : 90
+! Role    : Access layer all ports assigned to VLAN 90
+! ============================================================
+
+hostname Staff-Switch
+
+interface range fa0/1 - 24
+ switchport mode access
+ switchport access vlan 90
+
+end
