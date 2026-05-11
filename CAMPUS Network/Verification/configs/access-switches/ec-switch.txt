@@ -1,0 +1,15 @@
+! ============================================================
+! Engineering & Computing Department Switch
+! Device  : Cisco 2960
+! Building: B (Main Campus)
+! VLAN    : 50
+! Role    : Access layer all ports assigned to VLAN 50
+! ============================================================
+
+hostname EC-Switch
+
+interface range fa0/1 - 24
+ switchport mode access
+ switchport access vlan 50
+
+end
