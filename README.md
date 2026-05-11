@@ -14,6 +14,7 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 |---|---------|------------|--------------------------|
 | 1 | [SOHO Network Network](./SOHO%20Network) | Foundational | VLANs, Inter-VLAN Routing, DHCP, Wireless |
 | 2 | [Vic Modern Hotel (Multi-Floor Network)](./hotel-network) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless |
+| 3 | [Campus Network](./CAMPUS%20Network) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless, Layer3 Switch |
 
 ---
 
