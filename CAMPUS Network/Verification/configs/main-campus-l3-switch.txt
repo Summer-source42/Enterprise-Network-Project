@@ -1,0 +1,65 @@
+! ============================================================
+! Main Campus Layer 3 Switch
+! Device  : Cisco 3650 (Multilayer Switch)
+! Role    : Distribution layer connects all access switches to the router
+! Note    : Must have AC power supply module added in Packet Tracer physical tab
+!           before it will boot. Power off → drag module → power on.
+! ============================================================
+
+hostname Main-Campus-L3-Switch
+
+! -------------------------------------------------------
+! Access ports one per department access switch
+! Port VLAN must match the department it connects to
+! -------------------------------------------------------
+
+! Admin department switch → VLAN 10
+interface GigabitEthernet1/0/2
+ switchport mode access
+ switchport access vlan 10
+
+! HR department switch → VLAN 20
+interface GigabitEthernet1/0/3
+ switchport mode access
+ switchport access vlan 20
+
+! Finance department switch → VLAN 30
+interface GigabitEthernet1/0/4
+ switchport mode access
+ switchport access vlan 30
+
+! Business department switch → VLAN 40
+interface GigabitEthernet1/0/5
+ switchport mode access
+ switchport access vlan 40
+
+! Engineering & Computing switch → VLAN 50
+interface GigabitEthernet1/0/6
+ switchport mode access
+ switchport access vlan 50
+
+! Arts & Design switch → VLAN 60
+interface GigabitEthernet1/0/7
+ switchport mode access
+ switchport access vlan 60
+
+! Student Labs switch → VLAN 70
+interface GigabitEthernet1/0/8
+ switchport mode access
+ switchport access vlan 70
+
+! IT department switch → VLAN 80
+interface GigabitEthernet1/0/9
+ switchport mode access
+ switchport access vlan 80
+
+! -------------------------------------------------------
+! Trunk port uplink to Main Campus Router
+! Layer 3 switches require encapsulation to be set first
+! before trunk mode can be configured
+! -------------------------------------------------------
+interface GigabitEthernet1/0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+
+end
