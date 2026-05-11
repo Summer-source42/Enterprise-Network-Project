@@ -30,7 +30,11 @@ On top of the standard setup, the IT department required SSH-only access to all 
                                          Port Security
 ```
  
-> `![Network Topology](HOTEL_Network.png)`
+ 
+## Network Topology
+ 
+![Hotel Network Topology](Verification/HOTEL_Network.png)
+ 
  
 ---
  
