@@ -34,6 +34,12 @@ The branch network had to run completely separately from HQ, its own addressing,
  
 ---
  
+## Network Topology
+ 
+![SOHO Network Topology](verification/SOHO.png)
+ 
+---
+ 
 ## Requirements
  
 - One Cisco router and one Cisco switch
