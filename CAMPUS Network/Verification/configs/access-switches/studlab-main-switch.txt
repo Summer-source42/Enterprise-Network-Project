@@ -1,0 +1,15 @@
+! ============================================================
+! Student Labs Switch (Main Campus)
+! Device  : Cisco 2960
+! Building: C (Main Campus)
+! VLAN    : 70
+! Role    : Access layer all ports assigned to VLAN 70
+! ============================================================
+
+hostname StudLab-Main-Switch
+
+interface range fa0/1 - 24
+ switchport mode access
+ switchport access vlan 70
+
+end
