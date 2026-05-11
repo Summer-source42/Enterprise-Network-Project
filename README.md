@@ -14,7 +14,7 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 |---|---------|------------|--------------------------|
 | 1 | [SOHO Network Network](./SOHO%20Network) | Foundational | VLANs, Inter-VLAN Routing, DHCP, Wireless |
 | 2 | [Vic Modern Hotel (Multi-Floor Network)](./hotel-network) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless |
-| 3 | [Campus Network](./CAMPUS%20Network) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless, Layer3 Switch |
+| 3 | [Campus Network](./CAMPUS%20Network) | Advanced | RIPv2, Static Routing, Hierarchical Design, Multi-Campus, DHCP, VLANs, External Server |
 
 ---
 
@@ -27,15 +27,13 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 - Allocated IP address ranges per department/VLAN
 
 ### Implementation Phase
-- Built the full topology in Cisco Packet Tracer
+- Built full topologies in Cisco Packet Tracer
 - Configured VLANs, trunk ports, and access ports on switches
-- Configured inter VLAN routing using router on a stick
-- Set up DHCP server on routers with per VLAN address pools
-- Configured wireless access points with WPA2 PSK authentication
-- (Project 2) Connected routers via serial DCE cables with clock rate
-- (Project 2) Deployed OSPF across all three routers
-- (Project 2) Configured SSH for secure remote login on all routers
-- (Project 2) Implemented port security with sticky MAC and shutdown violation
+- Configured inter-VLAN routing using router-on-a-stick
+- Set up DHCP server on routers with per-VLAN address pools
+- Configured wireless access points with WPA2-PSK authentication
+- *(Project 2)* Connected routers via serial DCE cables, deployed OSPF, configured SSH and port security
+- *(Project 3)* Applied three-tier hierarchical model across two campuses, deployed RIPv2, configured static routing for an external cloud server, and set up Cisco 3650 multilayer switches at the distribution layer
 
 ### Verification Phase
 - Confirmed DHCP address assignment across all VLANs
@@ -63,28 +61,51 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 ## Repository Structure
 
 ```
-cisco-networking-labs/
+Enterprise-Network-Project/
 │
 ├── README.md
 │
-├── SOHO-network/
+├── SOHO Network/
 │   ├── README.md
 │   ├── SOHO.pkt
 │   └── configs/
 │       ├── router-config.txt
 │       └── switch-config.txt
 │
-└── hotel-network/
+├── hotel-network/
+│   ├── README.md
+│   ├── Hotel_Management.pkt
+│   └── configs/
+│       ├── floor1-router.txt
+│       ├── floor2-router.txt
+│       ├── floor3-router.txt
+│       └── switches/
+│           ├── floor1-switch.txt
+│           ├── floor2-switch.txt
+│           └── floor3-switch.txt
+│
+└── campus-network/
     ├── README.md
-    ├── Hotel_Management.pkt
+    ├── campus-network.pkt
+    ├── Verification/
+    │   └── Campus_Network.png
     └── configs/
-        ├── floor1-router.txt
-        ├── floor2-router.txt
-        ├── floor3-router.txt
-        └── switches/
-            ├── floor1-switch.txt
-            ├── floor2-switch.txt
-            └── floor3-switch.txt
+        ├── main-campus-router.txt
+        ├── branch-campus-router.txt
+        ├── cloud-router.txt
+        ├── main-campus-l3-switch.txt
+        ├── branch-campus-l3-switch.txt
+        └── access-switches/
+            ├── admin-switch.txt
+            ├── hr-switch.txt
+            ├── finance-switch.txt
+            ├── business-switch.txt
+            ├── ec-switch.txt
+            ├── ad-switch.txt
+            ├── studlab-main-switch.txt
+            ├── it-switch.txt
+            ├── staff-switch.txt
+            └── studlab-branch-switch.txt
 ```
 
 > `.pkt` Packet Tracer files are included inside each project folder alongside the README.
