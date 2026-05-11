@@ -1,0 +1,15 @@
+! ============================================================
+! Arts & Design Department Switch
+! Device  : Cisco 2960
+! Building: B (Main Campus)
+! VLAN    : 60
+! Role    : Access layer all ports assigned to VLAN 60
+! ============================================================
+
+hostname AD-Switch
+
+interface range fa0/1 - 24
+ switchport mode access
+ switchport access vlan 60
+
+end
