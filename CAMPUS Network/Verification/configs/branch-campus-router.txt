@@ -1,0 +1,67 @@
+! ============================================================
+! Branch Campus Router
+! Device  : Cisco 2911
+! Role    : Inter-VLAN routing + DHCP server + RIPv2
+! VLANs   : 90 (Staff), 100 (Student Labs)
+! Serial  : Se0/1/0 → Main Campus Router (10.10.10.0/30)
+! ============================================================
+
+hostname Branch-Campus-Router
+
+! -------------------------------------------------------
+! Bring up all interfaces
+! -------------------------------------------------------
+interface GigabitEthernet0/0
+ no shutdown
+
+interface Serial0/1/0
+ no shutdown
+
+! -------------------------------------------------------
+! Serial Interface IP Address
+! -------------------------------------------------------
+
+! Link to Main Campus Router
+interface Serial0/1/0
+ ip address 10.10.10.2 255.255.255.252
+
+! -------------------------------------------------------
+! Sub-Interfaces Inter-VLAN Routing (Router-on-a-Stick)
+! -------------------------------------------------------
+
+! VLAN 90 Staff
+interface GigabitEthernet0/0.90
+ encapsulation dot1Q 90
+ ip address 192.168.9.1 255.255.255.0
+
+! VLAN 100 Student Labs
+interface GigabitEthernet0/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.10.1 255.255.255.0
+
+! -------------------------------------------------------
+! DHCP Server one pool per department
+! -------------------------------------------------------
+service dhcp
+
+ip dhcp pool staff-pool
+ network 192.168.9.0 255.255.255.0
+ default-router 192.168.9.1
+ dns-server 192.168.9.1
+
+ip dhcp pool studlab-branch-pool
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 192.168.10.1
+
+! -------------------------------------------------------
+! RIPv2 advertise all connected networks
+! -------------------------------------------------------
+router rip
+ version 2
+ network 10.0.0.0
+ network 192.168.9.0
+ network 192.168.10.0
+ no auto-summary
+
+end
