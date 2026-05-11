@@ -1,0 +1,15 @@
+! ============================================================
+! Student Labs Switch (Branch Campus)
+! Device  : Cisco 2960
+! Faculty : Health and Sciences (Branch Campus)
+! VLAN    : 100
+! Role    : Access layer all ports assigned to VLAN 100
+! ============================================================
+
+hostname StudLab-Branch-Switch
+
+interface range fa0/1 - 24
+ switchport mode access
+ switchport access vlan 100
+
+end
