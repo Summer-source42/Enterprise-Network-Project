@@ -8,6 +8,14 @@ The goal isn't just to show that I passed an exam. It's to show that I can take 
 
 ---
 
+ 
+## Network Topology
+ 
+![Network Topology](./CAMPUS%20Network/Verification/Campus_Network.png)
+ 
+ 
+---
+
 ## Projects
 
 | # | Project | Complexity | Key Protocols & Features |
