@@ -36,7 +36,7 @@ The branch network had to run completely separately from HQ, its own addressing,
  
 ## Network Topology
  
-![SOHO Network Topology](verification/SOHO.png)
+![SOHO Network Topology](verification/SOHO20%Network/verification/soho-network-topology.png)
  
 ---
  
