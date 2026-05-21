@@ -16,8 +16,8 @@ The task was to plan, design, and implement the full network from scratch topolo
  
 ## Network Topology
  
-![Campus Network Topology](Verification/Campus_Network.png)
- 
+![Campus Network Topology](Verification/campus-network-topology.png)
+
 ---
  
 ## Requirements
