@@ -7,7 +7,7 @@ The projects progressively increase in complexity, covering foundational network
  
 ## Network Topology
  
-![Network Topology](./CAMPUS%20Network/Verification/Campus_Network.png)
+![Network Topology](./CAMPUS%20Network/Verification/campus-network-topology.png)
 
 ---
 
