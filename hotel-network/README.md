@@ -33,7 +33,7 @@ On top of the standard setup, the IT department required SSH-only access to all 
  
 ## Network Topology
  
-![Hotel Network Topology](Verification/HOTEL_Network.png)
+![Hotel Network Topology](/hotel-network/Verification/hotel-network-topology.png)
  
  
 ---
