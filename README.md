@@ -52,12 +52,6 @@ The projects progressively increase in complexity, covering foundational network
 | 2 | [Vic Modern Hotel (Multi-Floor Network)](./hotel-network) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless |
 | 3 | [Campus Network](./CAMPUS%20Network) | Advanced | RIPv2, Static Routing, Hierarchical Design, Multi-Campus, DHCP, VLANs, External Server |
 
----
-| # | Project | Complexity | Key Technologies & Concepts |
-|---|---|---|---|
-| 1 | SOHO Network | Foundational | VLANs, Inter-VLAN Routing, DHCP, Wireless Networking |
-| 2 | Vic Modern Hotel (Multi-Floor Network) | Intermediate | OSPF, SSH, Port Security, VLANs, DHCP, Wireless |
-| 3 | Campus Network | Advanced | RIPv2, Static Routing, Hierarchical Design, Multi-Campus Connectivity, DHCP, VLANs, External Server Integration |
 
 ---
 
