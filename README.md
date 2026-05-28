@@ -42,7 +42,6 @@ The projects progressively increase in complexity, covering foundational network
 - CLI Configuration & Validation
 - Linux Networking Tools
   
----
 
 ## Projects
 
